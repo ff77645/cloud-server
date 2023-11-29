@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import renderHtml from "./renderHtml.js";
 import { serveStatic } from 'hono/cloudflare-workers'
+import router from './routes'
 
 const app = new Hono();
 
@@ -13,16 +14,14 @@ app.get('/',async c =>{
     return c.html(renderHtml(JSON.stringify(results, null, 2)));
 })
 
-app.get('/test', async c =>{
-    const { db } = c.env;
-    const stmt = db.prepare("SELECT * FROM comments");
-    const { results } = await stmt.all();
-    return c.json(results);
-})  
-
-app.get('/page/home',c=>{
-  const posts = getPosts()
-  return c.html(<Top posts={posts} />)
+app.post('/alert-tabel',c=>{
+  const stmt = c.env.db.prepare('ALTER TABLE comments ADD abc TEXT')
+  const res = stmt.run()
+  return c.json(res)
 })
+
+
+app.route('/api',router)
+
 
 export default app;
