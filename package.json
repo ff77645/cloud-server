@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
+    "dev": "cross-env NODE_ENV=development wrangler dev",
     "start": "wrangler dev"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "wrangler": "^3.0.0"
   },
   "dependencies": {

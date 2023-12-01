@@ -6,7 +6,7 @@ const List = (props) => (
   </li>
 )
 
-export const Top = (props) => {
+export default function Top(props){
 
   return (
     <Layout title={'Top'}>
@@ -16,12 +16,10 @@ export const Top = (props) => {
           cursor:'pointer',
         }}>Posts</h2>
         <ul>
-          {props.posts.map((post) => (
-            <List post={post} />
-          ))}
         </ul>
       </main>
       <script src="/static/js/test.js"></script>
+      <script src="/static/file/index-e73a464e.js"></script>
     </Layout>
   )
 }

@@ -7,6 +7,10 @@ name = "cloud-server-db"
 binding = "db"
 database_id = "6ea399f6-74ea-451c-aa26-5ba1623dc619"
 
+[[r2_buckets]]
+binding = 'storage'
+bucket_name = 'storage'
+
 
 [site]
 bucket = "./src/assets"
