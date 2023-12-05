@@ -1,16 +1,19 @@
 import { Hono } from "hono";
+import Chat from "../../pages/Chat";
 
 const chat = new Hono();
 
 chat.post('/release',async c=>{
-  // const body = await c.req.parseBody()
-  // const formData = await c.req.formData() 
-  // const files = body.get('files')
-  // const formData = await c.req.arrayBuffer()
-  const body = await c.req.raw.formData()
-  
-  console.log({body});
-  return c.text('ok')
+  const path = c.req.query('path')
+  if(!path){
+    return new Response('path is required',{status:400})
+  }
+  const body = await c.req.arrayBuffer()
+  await c.env.storage.put(path,body)
+  return c.json({
+    success:true,
+    msg:'success',
+  })
 })
 
 
